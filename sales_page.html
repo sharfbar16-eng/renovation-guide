@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building a Quiet Head – The Renovation Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a1a;
+    --concrete: #e8e4df;
+    --dust: #f4f2ee;
+    --rust: #b84a2e;
+    --steel: #2d3a4a;
+    --gold: #c89b4f;
+    --light: #faf9f7;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--light);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--steel);
+    color: white;
+    padding: 80px 24px 72px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 60px,
+      rgba(255,255,255,0.03) 60px,
+      rgba(255,255,255,0.03) 61px
+    );
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(38px, 6vw, 72px);
+    font-weight: 900;
+    line-height: 1.08;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .hero h1 span {
+    color: var(--gold);
+  }
+  .hero-sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.75);
+    max-width: 540px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+  }
+  .cta-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .price-tag {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: white;
+  }
+  .price-tag span { font-size: 20px; vertical-align: super; color: var(--gold); }
+  .price-note { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; }
+  .btn-buy {
+    display: inline-block;
+    background: var(--rust);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 16px 48px;
+    border-radius: 3px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    margin-top: 8px;
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+  .btn-buy:hover { background: #9e3e25; }
+  .guarantee { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 6px; }
+
+  /* ── PROBLEM ── */
+  .section { padding: 64px 24px; max-width: 780px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 16px;
+  }
+  .section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 4vw, 40px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--steel);
+  }
+  .section p { font-size: 16px; color: #444; margin-bottom: 16px; }
+
+  /* ── PAIN POINTS ── */
+  .pain-grid {
+    background: var(--concrete);
+    padding: 56px 24px;
+  }
+  .pain-inner { max-width: 780px; margin: 0 auto; }
+  .pain-inner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 700;
+    color: var(--steel);
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .pains {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .pain-card {
+    background: white;
+    padding: 24px;
+    border-left: 3px solid var(--rust);
+  }
+  .pain-card p { font-size: 15px; color: #444; line-height: 1.5; }
+
+  /* ── WHAT'S INSIDE ── */
+  .steps-section { background: var(--dust); padding: 64px 24px; }
+  .steps-inner { max-width: 780px; margin: 0 auto; }
+  .steps-inner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 700;
+    color: var(--steel);
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .steps-sub { text-align: center; color: #666; font-size: 15px; margin-bottom: 36px; }
+  .steps-list { display: flex; flex-direction: column; gap: 12px; }
+  .step-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: white;
+    padding: 20px;
+    border-radius: 2px;
+  }
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--concrete);
+    line-height: 1;
+    min-width: 36px;
+  }
+  .step-text strong { display: block; font-size: 15px; color: var(--steel); margin-bottom: 4px; }
+  .step-text span { font-size: 14px; color: #666; }
+
+  /* ── AUTHOR ── */
+  .author-section { padding: 64px 24px; max-width: 780px; margin: 0 auto; }
+  .author-box {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    border-top: 2px solid var(--concrete);
+    padding-top: 40px;
+  }
+  .author-icon {
+    width: 72px;
+    height: 72px;
+    background: var(--steel);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+  .author-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--steel);
+    margin-bottom: 4px;
+  }
+  .author-title { font-size: 13px; color: var(--rust); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+  .author-bio { font-size: 15px; color: #555; line-height: 1.6; }
+
+  /* ── FOR WHO ── */
+  .forwhom { background: var(--steel); color: white; padding: 64px 24px; }
+  .forwhom-inner { max-width: 780px; margin: 0 auto; }
+  .forwhom h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 700;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .forwhom-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+  .forwhom-item {
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.12);
+    font-size: 15px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.5;
+  }
+  .forwhom-item strong { display: block; color: var(--gold); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+
+  /* ── FINAL CTA ── */
+  .final-cta {
+    text-align: center;
+    padding: 80px 24px;
+    background: var(--light);
+  }
+  .final-cta h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 900;
+    color: var(--steel);
+    margin-bottom: 16px;
+  }
+  .final-cta p { font-size: 17px; color: #555; margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .final-cta .price-tag { color: var(--steel); margin-bottom: 12px; display: block; }
+
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+  }
+
+  @media (max-width: 540px) {
+    .author-box { flex-direction: column; }
+    .hero { padding: 60px 20px 56px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">M.S Building — Professional Construction Guide</p>
+  <h1>Stop Getting <span>Burned</span><br>on Renovations.</h1>
+  <p class="hero-sub">The insider guide that tells you exactly what to ask, what to check, and what to never pay for — before a single wall comes down.</p>
+  <div class="cta-block">
+    <div class="price-tag"><span>$</span>19</div>
+    <div class="price-note">Instant PDF Download</div>
+    <a class="btn-buy" href="https://sharfbar.gumroad.com/l/bgkvsi" target="_blank">Get the Guide Now →</a>
+    <div class="guarantee">✓ Instant delivery</div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section style="padding: 64px 24px; max-width: 780px; margin: 0 auto;">
+  <p class="section-label">The Problem</p>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,40px);font-weight:700;line-height:1.2;margin-bottom:20px;color:var(--steel);">Most renovation horror stories start the same way.</h2>
+  <p style="font-size:16px;color:#444;margin-bottom:16px;">A contractor gives you a price. You shake hands. Work begins. Then come the "extras." Then the delays. Then the day you realize the budget is 40% over and you're not even halfway done.</p>
+  <p style="font-size:16px;color:#444;">It's not bad luck — it's a knowledge gap. Contractors know the game. Most clients don't. This guide levels the field.</p>
+</section>
+
+<!-- PAIN POINTS -->
+<div class="pain-grid">
+  <div class="pain-inner">
+    <h2>Sound familiar?</h2>
+    <div class="pains">
+      <div class="pain-card"><p>"My contractor keeps adding charges I didn't agree to."</p></div>
+      <div class="pain-card"><p>"I have no idea if the work being done is actually correct."</p></div>
+      <div class="pain-card"><p>"I paid a large deposit and now work has stalled."</p></div>
+      <div class="pain-card"><p>"Nobody told me about permits, fees, and structural approvals."</p></div>
+      <div class="pain-card"><p>"I moved in before everything was fixed and now I can't get the contractor back."</p></div>
+      <div class="pain-card"><p>"The budget doubled and I still don't know where it all went."</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT'S INSIDE -->
+<div class="steps-section">
+  <div class="steps-inner">
+    <h2>What's Inside: 8 Steps</h2>
+    <p class="steps-sub">From first budget to final key handover — every stage explained simply.</p>
+    <div class="steps-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Budget & Planning</strong><span>How to set a real budget (with a contingency you'll actually need) and define what you want before talking to anyone.</span></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Working with an Architect or Designer</strong><span>What to demand on paper — and why starting construction without full drawings is how budgets explode.</span></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Bill of Quantities & Tendering</strong><span>How to run a proper contractor comparison so you're not fooled by a suspiciously cheap quote.</span></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>The Contract & Payment Schedule</strong><span>The exact clauses your contract needs — and why you should never pay a large advance.</span></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-text"><strong>Demolition, Structure & Safety</strong><span>How to identify load-bearing walls and why skipping a structural engineer is the costliest mistake in renovation.</span></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">6</div>
+        <div class="step-text"><strong>Systems & Infrastructure</strong><span>Electrical, plumbing, and communications — what to document before walls are closed forever.</span></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">7</div>
+        <div class="step-text"><strong>Plastering, Tiling & Finishes</strong><span>Waterproofing tests, tile layout plans, and why floor protection saves you thousands.</span></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">8</div>
+        <div class="step-text"><strong>Handover & Home Inspection</strong><span>The official protocol, the final payment leverage, and why you must NOT move in before everything is fixed.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AUTHOR -->
+<section class="author-section">
+  <div class="author-box">
+    <div class="author-icon">🏗</div>
+    <div>
+      <div class="author-name">Bar Eitan Sharf</div>
+      <div class="author-title">Structural Engineer · M.S Building</div>
+      <p class="author-bio">M.S Building is a family construction firm. Growing up with the business around the dinner table, Eitan has managed complex build and renovation projects across Israel — and seen firsthand the exact moments where clients lose money, control, and sleep. This guide is what he wished every client knew before day one.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<div class="forwhom">
+  <div class="forwhom-inner">
+    <h2>This guide is for you if…</h2>
+    <div class="forwhom-grid">
+      <div class="forwhom-item"><strong>Homeowners</strong>Planning a renovation — big or small — and don't want to get burned by a contractor.</div>
+      <div class="forwhom-item"><strong>First-Time Buyers</strong>Buying a fixer-upper and need to understand what you're walking into before signing.</div>
+      <div class="forwhom-item"><strong>Real Estate Investors</strong>Managing a flip or rental upgrade and need to control costs and quality.</div>
+      <div class="forwhom-item"><strong>Anyone Who's Been Burned</strong>Already had a bad experience and want to make sure it never happens again.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="final-cta">
+  <h2>Build with confidence.<br>Move in with peace of mind.</h2>
+  <p>For the price of one contractor phone call, get the knowledge that protects your entire project.</p>
+  <span class="price-tag" style="color:var(--steel);display:block;margin-bottom:12px;font-family:'Playfair Display',serif;font-size:42px;font-weight:700;"><span style="font-size:20px;vertical-align:super;color:var(--rust);">$</span>19</span>
+  <a class="btn-buy" href="https://sharfbar.gumroad.com/l/bgkvsi" target="_blank">Download the Guide — $19 →</a>
+  <p style="font-size:13px;color:#aaa;margin-top:12px;">Instant PDF delivery</p>
+</div>
+
+<footer>
+  © M.S Building · sharfbar16@gmail.com · +972-54-261-1146
+</footer>
+
+</body>
+</html>
